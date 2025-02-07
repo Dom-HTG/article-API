@@ -1,10 +1,11 @@
 import { PrismaClient, User } from "@prisma/client";
-import { prisma } from "../../infrastructure/database";
+// import { prisma } from "../../infrastructure/database";
 import { CreateUserDTO, UserDTO } from "../dto/dto";
-import { handleAsync } from "../../infrastructure/utility/handle-async";
+import { IUserRepository } from "../../interfaces/user";
+// import { handleAsync } from "../../infrastructure/utility/handle-async";
 
 
-class UserRepository {
+class UserRepository implements IUserRepository {
     // database instance.
     // private prisma: PrismaClient;
 
@@ -24,6 +25,13 @@ class UserRepository {
 
         return newUser;
     };
+
+    async retrieveAllUsers(): Promise<UserDTO[]> {
+        
+        const prismaUsers: UserDTO[] = await this.prisma.user.findMany();
+
+        return prismaUsers;
+    }
 };
 
 export default UserRepository;

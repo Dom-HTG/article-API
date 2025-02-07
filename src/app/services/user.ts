@@ -26,15 +26,17 @@ export class UserService implements IUserService {
         return newUser;
     };
 
+    
+    async retrieveAllUsers(): Promise<UserDTO[]> {
+        const allUsers = await this.userRepository.retrieveAllUsers();
+        return allUsers;
+    };
+    
     async retrieveUserById(id: string): Promise<UserDTO> {
         
     };
 
     async retrieveUserByEmail(email: string): Promise<UserDTO> {
-        
-    };
-
-    async retrieveAllUsers(): Promise<UserDTO[]> {
         
     };
 

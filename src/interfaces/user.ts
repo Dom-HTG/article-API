@@ -1,17 +1,17 @@
 import { CreateUserDTO, ResetPasswordRequestDTO, UserDTO } from "../app/dto/dto";
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 // defines contracts for each layer of the user entity.
 
 export interface IUserController {
-    createUser(req: Request, res: Response): Promise<Response>;
-    retrieveUserById(req: Request, res: Response): Promise<Response>;
-    retrieveUserByEmail(req: Request, res: Response): Promise<Response>;
-    retrieveAllUsers(req: Request, res: Response): Promise<Response>;
-    updateUserProfile(req: Request, res: Response): Promise<Response>;
-    removeUser(req: Request, res: Response): Promise<Response>;
-    forgotPassword(req: Request, res: Response): Promise<Response>; // returns true if successful.
-    changePassword(req: Request, res: Response): Promise<Response>; // returns true if password reset is successful.
+    createUser(req: Request, res: Response, next: NextFunction): Promise<Response>;
+    retrieveUserById(req: Request, res: Response, next: NextFunction): Promise<Response>;
+    retrieveUserByEmail(req: Request, res: Response, next: NextFunction): Promise<Response>;
+    retrieveAllUsers(req: Request, res: Response, next: NextFunction): Promise<Response>;
+    updateUserProfile(req: Request, res: Response, next: NextFunction): Promise<Response>;
+    removeUser(req: Request, res: Response, next: NextFunction): Promise<Response>;
+    forgotPassword(req: Request, res: Response, next: NextFunction): Promise<Response>; // returns true if successful.
+    changePassword(req: Request, res: Response, next: NextFunction): Promise<Response>; // returns true if password reset is successful.
 };
 
 export interface IUserService {

@@ -5,40 +5,73 @@ import { CreateUserDTO, ResetPasswordRequestDTO, UserDTO } from "../dto/dto";
 import { UserService } from "../services/user";
 import { ResponseHandler } from "../../infrastructure/utility/response-handler";
 import { handleAsync } from "../../infrastructure/utility/handle-async";
+
 // const healthcheck = (_req: Request, res: Response) => {
 //     res.status(200).json({ message: "Check complete. Server is healthy and running" });
 // };
 
 export class UserController implements IUserController {
-    private readonly userService: UserService; 
 
-    constructor(userService: UserService) {
-        this.userService = userService;
-    }; // init dependency.
+    constructor(private readonly _userService: UserService) {}; // init dependency.
 
-    createUser = handleAsync(
-        async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
-            const user = req.body;
-            const createdUser = await this.userService.createUser(user);
+    public createUser = handleAsync(
+        async (
+            req: Request, 
+            res: Response, 
+            next: NextFunction
+        ): Promise<Response> => {
+            const user: CreateUserDTO = req.body;
+            const createdUser = await this._userService.createUser(user);
             return res.status(201).json(ResponseHandler.success("user created successfully", createdUser));
         }
     );
 
-    async retrieveUserById(): Promise<UserDTO> {
-        
-    };
+    retrieveUserById = handleAsync(
+        async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response> => {
+        const id = req.params.id; // get ID.
+        const user = await this._userService.retrieveUserById(id);
+        return res.status(200).json(ResponseHandler.success("user retrieved successfully", user));
+    });
 
-    async retrieveUserByEmail(email: string): Promise<UserDTO> {
-        
-    };
+    public retrieveUserByEmail =  handleAsync(
+        async (
+            req: Request,
+            res: Response,
+            next: NextFunction
+        ): Promise<Response> => {
+        const email = req.body.email;
+        // perform validation on the provided email
 
-    async retrieveAllUsers(): Promise<UserDTO[]> {
-        
-    };
+        const user = await this._userService.retrieveUserByEmail(email);
 
-    async updateUserProfile(): Promise<UserDTO> {
-        
-    };
+        return res.status(200).json(ResponseHandler.success("user retrieved successfully", user));
+    });
+
+    public retrieveAllUsers = handleAsync(
+        async (
+            _req: Request,
+            res: Response,
+            next: NextFunction
+        ): Promise<Response> => {
+        const allUsers = await this._userService.retrieveAllUsers();
+        return res.status(200).json(ResponseHandler.success("All users retrieved successfully", allUsers));
+    });
+
+    public updateUserProfile = handleAsync(
+        async(
+            req: Request,
+            res: Response,
+            next: NextFunction 
+
+    ): Promise<Response> => {
+        const updateData: Partial<UserDTO> = req.body;
+
+        const updatedUser = await this.
+    })
 
     async removeUser(): Promise<UserDTO> {
         

@@ -2,7 +2,7 @@ export interface UserDTO {
     id: number;
     email: string;
     fullname: string;
-    password: string;
+    password?: string;
     articles?: articleDTO[];
 };
 
