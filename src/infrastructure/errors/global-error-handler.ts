@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { ErrorResponseDTO } from '../../app/dto/dto';
 import { ApiError } from './api-error';
+
+// handles application errors globally.
 export const HandleError = () => {
     return (
         e: Error | ApiError,

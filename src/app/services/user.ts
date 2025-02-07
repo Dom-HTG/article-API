@@ -1,6 +1,6 @@
 import { IUserService } from "../../interfaces/user";
 import { CreateUserDTO, ResetPasswordRequestDTO, UserDTO } from "../dto/dto";
-import { UserRepository } from "../repositories/user";
+import UserRepository  from "../repositories/user";
 import * as bcrypt from 'bcryptjs';
 
 export class UserService implements IUserService {

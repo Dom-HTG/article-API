@@ -1,15 +1,15 @@
 import { PrismaClient, User } from "@prisma/client";
 import { prisma } from "../../infrastructure/database";
-import { CreateUserDTO, IUser, UserDTO } from "../dto/dto";
+import { CreateUserDTO, UserDTO } from "../dto/dto";
 import { handleAsync } from "../../infrastructure/utility/handle-async";
 
 
-export class UserRepository {
+class UserRepository {
     // database instance.
-    private prisma: PrismaClient;
+    // private prisma: PrismaClient;
 
-    constructor(prisma: PrismaClient) {
-        this.prisma = prisma;
+    constructor(private readonly prisma: PrismaClient) {
+        // this.prisma = prisma;
     };
 
     
@@ -25,3 +25,5 @@ export class UserRepository {
         return newUser;
     };
 };
+
+export default UserRepository;
